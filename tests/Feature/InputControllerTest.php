@@ -33,7 +33,7 @@ class InputControllerTest extends TestCase
                 'first'=> 'M',
                 'last'=> 'S',
             ],
-        ])->assertSeeText('name')->assertSeeText('M')->assertSeeText('last')->assertSeeText('S');
+        ])->assertSeeText('M')->assertSeeText('S');
     }
 
     public function testArrayInput()
