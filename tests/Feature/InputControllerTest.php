@@ -87,6 +87,6 @@ class InputControllerTest extends TestCase
             "name" => "MSS",
             "password"=> "rahasia",
             "admin"=> "true",
-        ])->assertSeeText("MSS")->assertSeeText('rahasia')->assertSeeText("false k");
+        ])->assertSeeText("MSS")->assertSeeText('rahasia')->assertSeeText("false");
     }
 } 
