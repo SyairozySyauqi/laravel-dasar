@@ -51,4 +51,13 @@ class InputControllerTest extends TestCase
             ],
         ])->assertSeeText('Apple')->assertSeeText('Pear');
     }
+
+    public function testInputType()
+    {
+        $this->post('/input/type', [
+            'name' => 'M',
+            'married' => 'false',
+            'birth_date' => '10-10-2010'
+        ])->assertSeeText('M')->assertSeeText('false')->assertSeeText('2010');
+    }
 } 
