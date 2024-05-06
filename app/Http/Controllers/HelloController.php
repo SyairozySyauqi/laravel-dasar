@@ -25,7 +25,6 @@ class HelloController extends Controller
         $request->url() . PHP_EOL .
         $request->fullUrl() . PHP_EOL .
         $request->method() . PHP_EOL .
-        $request->isMethod('post') . PHP_EOL .
         $request->header('Accept');
     }
 }
