@@ -3,6 +3,7 @@
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\HelloController;
 use App\Http\Controllers\InputController;
+use App\Http\Controllers\ResponseController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -89,3 +90,12 @@ Route::post('/input/filter/except', [InputController::class,'filterExcept']);
 Route::post('/input/filter/merge', [InputController::class,'filterMerge']);
 
 Route::post('/file/upload', [FileController::class,'upload']);
+
+Route::get('/response/hello', [ResponseController::class, 'response']);
+Route::get('/response/header', [ResponseController::class, 'header']);
+Route::prefix("/response/type")->group(function (){
+    Route::get('/view', [ResponseController::class, 'responseView']);
+    Route::get('/json', [ResponseController::class, 'responseJson']);
+    Route::get('/file', [ResponseController::class, 'responseFile']);
+    Route::get('/download', [ResponseController::class, 'responseDownload']);
+});
