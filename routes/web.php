@@ -99,3 +99,9 @@ Route::prefix("/response/type")->group(function (){
     Route::get('/file', [ResponseController::class, 'responseFile']);
     Route::get('/download', [ResponseController::class, 'responseDownload']);
 });
+
+Route::controller(\App\Http\Controllers\CookieController::class)->group(function (){
+    Route::get('/cookie/set', 'createCookie');
+    Route::get('/cookie/get', 'getCookie');
+    Route::get('/cookie/clear', 'clearCookie');
+});
