@@ -9,6 +9,7 @@ use App\Http\Controllers\ResponseController;
 use App\Http\Middleware\ContohMiddleWare;
 use App\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\URL;
 
 /*
 |--------------------------------------------------------------------------
@@ -113,15 +114,15 @@ Route::controller(\App\Http\Controllers\CookieController::class)->group(function
     Route::get('/cookie/clear', 'clearCookie');
 });
 
-Route::get('redirect/from', [RedirectController::class, 'redirectFrom']);
-Route::get('redirect/to', [RedirectController::class, 'redirectTo']);
+Route::get('/redirect/from', [RedirectController::class, 'redirectFrom']);
+Route::get('/redirect/to', [RedirectController::class, 'redirectTo']);
 Route::get('/redirect/name', [RedirectController::class, 'redirectName']);
 Route::get('/redirect/name/{name}', [RedirectController::class, 'redirectHello'])
     ->name('redirect-hello');
 Route::get('/redirect/named', function (){
-//    return route('redirect-hello', ['name' => 'Eko']);
-//    return url()->route('redirect-hello', ['name' => 'Eko']);
-    return \Illuminate\Support\Facades\URL::route('redirect-hello', ['name' => 'Eko']);
+//    return route('redirect-hello', ['name' => 'MSS']);
+//    return url()->route('redirect-hello', ['name' => 'MSS']);
+    return URL::route('redirect-hello', ['name' => 'MSS']);
 });
 Route::get('/redirect/action', [RedirectController::class, 'redirectAction']);
 Route::get('/redirect/away', [RedirectController::class, 'redirectAway']);
@@ -135,5 +136,14 @@ Route::middleware('contoh:PZN,401')->prefix('/middleware')->group(function (){
     });    
 });
 
+Route::get('/url/action', function (){
+    // return action([FormController::class, 'form'], []);
+    // return url()->action([FormController::class, 'form'], []);
+    return URL::action([FormController::class, 'form'], []);
+});
 Route::get('/form', [FormController::class,'form']);
 Route::post('/form', [FormController::class,'submitForm']);
+
+Route::get('/url/current', function () {
+    return URL::full();
+});
