@@ -78,8 +78,10 @@ Route::get("/produk-redirect/{id}", function ($id) {
     return redirect()->route('product.detail', ['id' => $id]);
 });
 
-Route::get('/controller/hello/request', [HelloController::class, 'request']);
-Route::get('/controller/hello/{name}', [HelloController::class, 'hello']);
+Route::controller(HelloController::class)->group(function () {
+    Route::get('/controller/hello/request', 'request');
+    Route::get('/controller/hello/{name}', 'hello');
+});
 
 Route::get('/input/hello', [InputController::class,'hello']);
 Route::post('/input/hello', [InputController::class,'hello']);
@@ -124,12 +126,14 @@ Route::get('/redirect/named', function (){
 Route::get('/redirect/action', [RedirectController::class, 'redirectAction']);
 Route::get('/redirect/away', [RedirectController::class, 'redirectAway']);
 
-Route::get('/middleware/api', function() {
-    return "OK";
-})->middleware(['contoh:PZN,401']);
-Route::get('/middleware/group', function() {
-    return "Group";
-})->middleware(['pzn']);
+Route::middleware('contoh:PZN,401')->prefix('/middleware')->group(function (){
+    Route::get('/api', function() {
+        return "OK";
+    });
+    Route::get('/group', function() {
+        return "Group";
+    });    
+});
 
 Route::get('/form', [FormController::class,'form']);
 Route::post('/form', [FormController::class,'submitForm']);
