@@ -5,6 +5,7 @@ use App\Http\Controllers\HelloController;
 use App\Http\Controllers\InputController;
 use App\Http\Controllers\RedirectController;
 use App\Http\Controllers\ResponseController;
+use App\Http\Middleware\ContohMiddleWare;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -119,3 +120,10 @@ Route::get('/redirect/named', function (){
 });
 Route::get('/redirect/action', [RedirectController::class, 'redirectAction']);
 Route::get('/redirect/away', [RedirectController::class, 'redirectAway']);
+
+Route::get('/middleware/api', function() {
+    return "OK";
+})->middleware(['contoh:PZN,401']);
+Route::get('/middleware/group', function() {
+    return "Group";
+})->middleware(['pzn']);
